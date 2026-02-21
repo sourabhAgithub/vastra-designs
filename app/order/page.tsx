@@ -17,19 +17,13 @@ export default function OrderPage() {
   });
 
   const submitOrder = async () => {
-    const res = await fetch("/api/order", {
+    await fetch("/api/order", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         product,
         ...form,
       }),
     });
-
-    const data = await res.json();
-    console.log("Response:", data);
 
     alert("Order submitted!");
   };
