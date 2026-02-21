@@ -16,6 +16,14 @@ export default function OrderPage() {
     notes: "",
   });
 
+  const [errors, setErrors] = useState<any>({});
+
+  const validateForm = () => {
+    const newErrors: any = {};
+
+    // Name Validations
+  if(!form)};
+
   const submitOrder = async () => {
     await fetch("/api/order", {
       method: "POST",
