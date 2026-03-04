@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { Suspense, useState, type FormEvent } from "react";
 import { products } from "../lib/products";
 import styles from "./page.module.css";
 
@@ -88,7 +88,7 @@ function validateForm(form: OrderForm): FormErrors {
   return nextErrors;
 }
 
-export default function OrderPage() {
+function OrderPageContent() {
   const searchParams = useSearchParams();
   const product = searchParams.get("product");
 
@@ -164,7 +164,8 @@ export default function OrderPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Could not submit your order.");
+        setSubmitError("Could not submit your order. Please try again.");
+        return;
       }
 
       setSubmitMessage("Order submitted successfully. We will contact you soon.");
@@ -361,5 +362,23 @@ export default function OrderPage() {
         </aside>
       </div>
     </section>
+  );
+}
+
+export default function OrderPage() {
+  return (
+    <Suspense
+      fallback={
+        <section className={styles.orderPage}>
+          <header className={styles.orderHeader}>
+            <p className={styles.orderEyebrow}>Vastra Checkout</p>
+            <h1 className={styles.orderTitle}>Place Your Order</h1>
+            <p className={styles.orderSubtitle}>Loading order form...</p>
+          </header>
+        </section>
+      }
+    >
+      <OrderPageContent />
+    </Suspense>
   );
 }
