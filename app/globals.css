@@ -3,19 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg-soft: #fdfaf6;
+  --surface: #ffffff;
+  --surface-border: #e9e0d6;
+  --ink: #1e1a17;
+  --ink-muted: #66594f;
+  --accent: #a1462f;
+  --accent-strong: #7e2f1d;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 0%, #fff5ea 0%, transparent 35%),
+    radial-gradient(circle at 95% 20%, #fbead7 0%, transparent 30%),
+    var(--bg-soft);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
 }

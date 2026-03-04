@@ -1,40 +1,22 @@
-import Link from "next/link";
+import type { ReactNode } from "react";
+import SiteFooter from "@/components/site-footer";
+import SiteNav from "@/components/site-nav";
+import "./globals.css";
+import styles from "./layout.module.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, fontFamily: "sans-serif" }}>
-        <header
-          style={{
-            padding: "20px",
-            borderBottom: "1px solid #eee",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Link href="/">Vastra Designs</Link>
-
-          <nav style={{ display: "flex", gap: "20px" }}>
-            <Link href="/products">Collection</Link>
-            <Link href="/about">About</Link>
-          </nav>
-        </header>
-
-        <div style={{ padding: "40px" }}>{children}</div>
-
-        <footer
-          style={{
-            padding: "20px",
-            borderTop: "1px solid #eee",
-            marginTop: "40px",
-          }}
-        >
-          © {new Date().getFullYear()} Vastra Designs
-        </footer>
+      <body>
+        <div className={styles.siteShell}>
+          <SiteNav />
+          <main className={styles.pageShell}>{children}</main>
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );
